@@ -1,0 +1,59 @@
+to do:
+O input system
+O tilemap
+O placeholder tilemap graphics
+O get player to move
+
+- figure out how to get tiles to do certain effects
+  | gameobject brush https://www.youtube.com/watch?v=rIRqu3nlHOY
+- make ledge tiles
+  | script is already made, just need to drag it on
+
+
+- keep in mind:
+  | one tilemap per layer
+    + walkable
+      = decoration layer might not be needed if tiles are combined
+      = ledges; they'll have a script to move an entity down more
+      = cave goal
+    + decoration
+      = might not be necessary if tiles are combined with walkable
+    + collision
+      = trees
+    + water
+      = this will help with the lightning
+    + entity
+      = player
+      = enemy
+  | according to the medium article, you can assign cost to a tile on a specific layer
+    + might be best to separate any different types of terrain to make cost easier to calculate?
+    + how tf do ledges work
+    + maybe make it so that players can use it but not enemies, idk
+
+  | we have a dictionary of tiles with the above, but what problems does it solve?
+    + can BFS the water
+    + can allow enemies to A* to player
+  | what problems does it create?
+    + we need to record the player's location on both the dictionary and the game
+
+  | fuck the dictionary, go with samyam's approach
+  | use in conjunction with game object brush
+
+
+
+https://medium.com/@allencoded/unity-tilemaps-and-storing-individual-tile-data-8b95d87e9f32
+
+- Ledge
+  | Has an enum with the direction
+  | Getter for enum that can be used in TilemapMovement.CanMove()
+
+- Enemies can't go into the goal
+  | To avoid making a whole other layer for the goal and also avoid checking for if the entity is an enemy, make the tile
+    in front of the cave the actual goal
+
+- Entities need to find the tilemaps automatically when placed down
+
+Lessons learned:
+- The player was moving twice--once for pressing the button, and once for performing the action or something like that
+  | I also needed to make a movement cancelled event to reset the input vector
+- The player is also not moving at 0 or 1, but in between. The input is normalized in that if you go diagonal, it's (.71, .71) and not (1, 1)
