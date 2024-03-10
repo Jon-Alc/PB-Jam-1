@@ -15,11 +15,27 @@ MonoBehaviour:
   upTiles: []
   downTiles:
   - {fileID: 11400000, guid: c1216f439e795834d97ecc1df330de98, type: 2}
+  - {fileID: 11400000, guid: 40d439a97a9f3e24bb60be765571ff9c, type: 2}
   leftTiles:
   - {fileID: 11400000, guid: 5b6b611ab0baf754e8ee088b15c49cb6, type: 2}
+  - {fileID: 11400000, guid: 45f8656a6ac332240bd2ee67cec07468, type: 2}
   rightTiles:
   - {fileID: 11400000, guid: 40f64cc4b35cf3f4eb78dc15c6d09d04, type: 2}
+  - {fileID: 11400000, guid: 6983f1835b785f74f997cae1093b1854, type: 2}
   waterTiles:
   - {fileID: 11400000, guid: e652fb1c4016d78459490af47185d267, type: 2}
+  - {fileID: 11400000, guid: 3cb30880bda6e4040947706302564bdd, type: 2}
+  - {fileID: 11400000, guid: 1fd37cfd7396d3b408131010d84d882c, type: 2}
+  - {fileID: 11400000, guid: cdd9d855cb664e9469d48a545893da31, type: 2}
+  - {fileID: 11400000, guid: 82ead1a6123a7a749b3df95044cf12e4, type: 2}
+  - {fileID: 11400000, guid: f6eef64dd0a2f7e428b471accff6eb77, type: 2}
+  - {fileID: 11400000, guid: d0dda22ece763ab4ab411ecd302f7066, type: 2}
+  - {fileID: 11400000, guid: a1c3d0d2dce11584087ea311629bd0eb, type: 2}
+  - {fileID: 11400000, guid: ef79173f43bd78c4a974236129d81907, type: 2}
+  - {fileID: 11400000, guid: a6be214a5a12e6846b0c3edd7536d64f, type: 2}
+  - {fileID: 11400000, guid: 1580a38bc4a121e47bb67d43ab6e70ef, type: 2}
+  - {fileID: 11400000, guid: b892a1dac2b47584cb5c328ed3bb2d57, type: 2}
+  - {fileID: 11400000, guid: d04ed0fe0afe00744970aed48371d055, type: 2}
+  - {fileID: 11400000, guid: ee2d36eb86542104face3673922f4d88, type: 2}
   mudTiles:
   - {fileID: 11400000, guid: 4159c60afa4888842b87d19134115fe4, type: 2}
