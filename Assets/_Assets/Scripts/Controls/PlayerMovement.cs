@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,7 +14,8 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private List<Sprite> directionalSprites; 
     
     private Vector2 _moveDirection;
-    private Direction _facingDirection;
+
+    public static event Action<Direction> PlayerCharacterMove;
 
     void Awake()
     {
@@ -59,12 +61,12 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_moveDirection != Vector2.zero && tilemapMovement.CanMove)
-        {
-            Direction directionEnum = DetermineMoveDirection(_moveDirection);
-            spriteRenderer.sprite = directionalSprites[(int) directionEnum];
-            tilemapMovement.Move(directionEnum);
-        }
+        if (_moveDirection == Vector2.zero || !tilemapMovement.CanMove) return;
+        
+        Direction directionEnum = DetermineMoveDirection(_moveDirection);
+        spriteRenderer.sprite = directionalSprites[(int) directionEnum];
+        tilemapMovement.Move(directionEnum);
+        PlayerCharacterMove?.Invoke(directionEnum);
     }
     
     private Direction DetermineMoveDirection(Vector2 direction)

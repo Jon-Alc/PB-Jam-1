@@ -17,7 +17,8 @@ O make ledge tiles
 * Replace all the tiles
   | done for now
 
-- Implement goal behavior
+O Implement goal behavior
+- Implement lightning behavior
 - Implement AI behavior
 - Implement die and restart
 O Tile movement transitions, for general movement and for ledges

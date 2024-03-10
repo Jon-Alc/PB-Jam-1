@@ -180,7 +180,6 @@ MonoBehaviour:
   - {fileID: -1237400813, guid: 0ca82f4d088db8748808c22dfc1f1270, type: 3}
   - {fileID: 429370076, guid: 0ca82f4d088db8748808c22dfc1f1270, type: 3}
   - {fileID: -1936679647, guid: 0ca82f4d088db8748808c22dfc1f1270, type: 3}
-  playerMoveDelayInSeconds: 0.1
 --- !u!114 &3728932440691170392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,3 +197,4 @@ MonoBehaviour:
   ledgeTilemap: {fileID: 0}
   collisionTilemap: {fileID: 0}
   tileData: {fileID: 11400000, guid: 2d3cade2a72078d45a3d02ea89950cf0, type: 2}
+  tileTravelSpeed: 0
