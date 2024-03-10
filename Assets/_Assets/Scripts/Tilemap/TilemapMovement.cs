@@ -1,7 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.Tilemaps;
 
 // https://www.youtube.com/watch?v=YnwOoxtgZQI
@@ -12,29 +14,44 @@ public class TilemapMovement : MonoBehaviour
     [SerializeField] private Tilemap waterTilemap;
     [SerializeField] private Tilemap ledgeTilemap;
     [SerializeField] private Tilemap collisionTilemap;
+    [FormerlySerializedAs("tileDirectionData")] [SerializeField] private TileData tileData;
 
     public void Move(Vector2 direction)
     {
         Direction directionEnum = DetermineMoveDirection(direction);
         Vector3 directionVector = GetVectorDirectionByEnum(directionEnum);
+        Vector3Int destinationTileCoordinates = groundTilemap.WorldToCell(transform.position + directionVector);
         
-        if (!ValidMove(directionVector, directionEnum)) return;
+        if (!ValidMove(directionEnum, destinationTileCoordinates)) return;
+
+        // this does NOT check if the tile in front of the ledge is passable
+        // it assumes that the level designer accounts for this
+        if (ledgeTilemap.HasTile(destinationTileCoordinates))
+        {
+            directionVector *= 2;
+        }
         
         transform.position += directionVector;
     }
 
-    private bool ValidMove(Vector3 direction, Direction playerDirection)
+    private bool ValidMove(Direction playerDirection, Vector3Int destinationTileCoordinates)
     {
-        Vector3Int tileDestination = groundTilemap.WorldToCell(transform.position + direction);
+
         
-        if (groundTilemap.HasTile(tileDestination) || waterTilemap.HasTile(tileDestination))
+        if (groundTilemap.HasTile(destinationTileCoordinates) || waterTilemap.HasTile(destinationTileCoordinates))
         {
             return true;
         }
-        if (ledgeTilemap.HasTile(tileDestination))
+        if (ledgeTilemap.HasTile(destinationTileCoordinates))
         {
-            Direction ledgeDirection = ledgeTilemap.GetTile(tileDestination).GetComponent<Ledge>().LedgeJumpDirection;
-            return playerDirection == ledgeDirection;
+            TileBase destinationTile = ledgeTilemap.GetTile(destinationTileCoordinates);
+            if ((playerDirection == Direction.Up && tileData.upTiles.Contains(destinationTile)) ||
+                (playerDirection == Direction.Down && tileData.downTiles.Contains(destinationTile)) ||
+                (playerDirection == Direction.Left && tileData.leftTiles.Contains(destinationTile)) ||
+                (playerDirection == Direction.Right && tileData.rightTiles.Contains(destinationTile)))
+            {
+                return true;
+            }
         }
         // tile is either a collision or doesn't exist
         return false;
