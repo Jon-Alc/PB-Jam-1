@@ -4,10 +4,20 @@ O tilemap
 O placeholder tilemap graphics
 O get player to move
 
-- figure out how to get tiles to do certain effects
-  | gameobject brush https://www.youtube.com/watch?v=rIRqu3nlHOY
-- make ledge tiles
+O figure out how to get tiles to do certain effects
+  X gameobject brush https://www.youtube.com/watch?v=rIRqu3nlHOY
+    O didn't work, did scriptableobjects to save time despite inefficiency
+    | alternative strat: ledges are gameobjects on top of walkable layer
+      + the ledges have the script but you need to handle movement elsewhere
+O make ledge tiles
   | script is already made, just need to drag it on
+
+- Import Jo's art assets
+- Replace all the tiles
+
+- Implement goal behavior
+- Implement AI behavior
+- Implement die and restart
 
 
 - keep in mind:

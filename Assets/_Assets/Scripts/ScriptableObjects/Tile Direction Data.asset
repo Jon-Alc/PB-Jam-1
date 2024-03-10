@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1392ac6451fbe1840ab6ce99dd3e3a24, type: 3}
+  m_Name: Tile Direction Data
+  m_EditorClassIdentifier: 
+  upTiles: []
+  downTiles:
+  - {fileID: 11400000, guid: c1216f439e795834d97ecc1df330de98, type: 2}
+  leftTiles:
+  - {fileID: 11400000, guid: 5b6b611ab0baf754e8ee088b15c49cb6, type: 2}
+  rightTiles:
+  - {fileID: 11400000, guid: 40f64cc4b35cf3f4eb78dc15c6d09d04, type: 2}
+  waterTiles:
+  - {fileID: 11400000, guid: e652fb1c4016d78459490af47185d267, type: 2}
+  mudTiles:
+  - {fileID: 11400000, guid: 4159c60afa4888842b87d19134115fe4, type: 2}
