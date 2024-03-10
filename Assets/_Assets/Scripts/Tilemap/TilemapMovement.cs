@@ -59,7 +59,7 @@ public class TilemapMovement : MonoBehaviour
     {
         if (destination != transform.position && _elapsedTravelTime < 1)
         {
-            _elapsedTravelTime = Mathf.MoveTowards(_elapsedTravelTime, 1, tileTravelSpeed * Time.deltaTime);
+            _elapsedTravelTime = Mathf.MoveTowards(_elapsedTravelTime, 1, tileTravelSpeed * Time.fixedDeltaTime);
             transform.position = Vector2.Lerp(startingPoint, destination, _elapsedTravelTime);
             CanMove = false;
         }
