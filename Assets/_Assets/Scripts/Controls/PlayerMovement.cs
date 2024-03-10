@@ -8,10 +8,12 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private InputReader input;
     [SerializeField] private TilemapMovement tilemapMovement;
-    [SerializeField] [Range(.1f, 1f)] private float playerMoveDelayInSeconds;
-
+    [SerializeField] private SpriteRenderer spriteRenderer;
+    [Tooltip("Up = 0, Down = 1, Left = 2, Right = 3")]
+    [SerializeField] private List<Sprite> directionalSprites; 
+    
     private Vector2 _moveDirection;
-    private float _moveDelay;
+    private Direction _facingDirection;
 
     void Awake()
     {
@@ -37,7 +39,6 @@ public class PlayerMovement : MonoBehaviour
     void ResetControls()
     {
         _moveDirection = new Vector2(0.0f, 0.0f);
-        _moveDelay = 0.0f;
     }
     
     void OnMoveEvent(Vector2 axis)
@@ -58,14 +59,21 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        if (_moveDirection != Vector2.zero && _moveDelay <= 0.0f)
+        if (_moveDirection != Vector2.zero && tilemapMovement.CanMove)
         {
-            tilemapMovement.Move(_moveDirection);
-            _moveDelay = playerMoveDelayInSeconds;
+            Direction directionEnum = DetermineMoveDirection(_moveDirection);
+            spriteRenderer.sprite = directionalSprites[(int) directionEnum];
+            tilemapMovement.Move(directionEnum);
         }
-        else if (_moveDelay > 0.0f)
-        {
-            _moveDelay -= Time.deltaTime;            
-        }
+    }
+    
+    private Direction DetermineMoveDirection(Vector2 direction)
+    {
+        Direction moveDirection = Direction.Up;
+        if (direction.x > 0) { moveDirection = Direction.Right; }
+        else if (direction.x < 0) { moveDirection = Direction.Left; }
+        else if (direction.y < 0) { moveDirection = Direction.Down; }
+
+        return moveDirection;
     }
 }

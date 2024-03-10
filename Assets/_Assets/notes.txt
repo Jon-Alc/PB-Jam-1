@@ -12,12 +12,16 @@ O figure out how to get tiles to do certain effects
 O make ledge tiles
   | script is already made, just need to drag it on
 
-- Import Jo's art assets
-- Replace all the tiles
+* Import Jo's art assets
+  | done for now
+* Replace all the tiles
+  | done for now
 
 - Implement goal behavior
 - Implement AI behavior
 - Implement die and restart
+O Tile movement transitions, for general movement and for ledges
+  | if we take this game further, it may be worth replacing the code with the Unity animator
 
 
 - keep in mind:

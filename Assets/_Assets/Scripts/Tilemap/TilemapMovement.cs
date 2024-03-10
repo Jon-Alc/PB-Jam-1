@@ -14,11 +14,31 @@ public class TilemapMovement : MonoBehaviour
     [SerializeField] private Tilemap waterTilemap;
     [SerializeField] private Tilemap ledgeTilemap;
     [SerializeField] private Tilemap collisionTilemap;
-    [FormerlySerializedAs("tileDirectionData")] [SerializeField] private TileData tileData;
+    [SerializeField] private TileData tileData;
+    [SerializeField] [Range(1.0f, 10.0f)] private float tileTravelSpeed;
 
-    public void Move(Vector2 direction)
+    private float _elapsedTravelTime;
+    private Vector3 startingPoint;
+    private Vector3 destination;
+    public bool CanMove { get; private set; }
+
+    private void Awake()
     {
-        Direction directionEnum = DetermineMoveDirection(direction);
+        Reset();
+    }
+
+    private void Reset()
+    {
+        _elapsedTravelTime = 0f;
+        startingPoint = transform.position;
+        destination = startingPoint;
+        CanMove = true;
+    }
+
+    public void Move(Direction directionEnum)
+    {
+        if (!CanMove) return;
+        
         Vector3 directionVector = GetVectorDirectionByEnum(directionEnum);
         Vector3Int destinationTileCoordinates = groundTilemap.WorldToCell(transform.position + directionVector);
         
@@ -31,7 +51,26 @@ public class TilemapMovement : MonoBehaviour
             directionVector *= 2;
         }
         
-        transform.position += directionVector;
+        // transform.position += directionVector;
+        destination = transform.position + directionVector;
+    }
+
+    void FixedUpdate()
+    {
+        if (destination != transform.position && _elapsedTravelTime < 1)
+        {
+            _elapsedTravelTime = Mathf.MoveTowards(_elapsedTravelTime, 1, tileTravelSpeed * Time.deltaTime);
+            transform.position = Vector2.Lerp(startingPoint, destination, _elapsedTravelTime);
+            CanMove = false;
+        }
+        else
+        { // it's possible for _elapsedTravelTime to be .99999f although the transform.position == destination
+            startingPoint = transform.position;
+            _elapsedTravelTime = 0;
+            CanMove = true;
+        }
+        
+
     }
 
     private bool ValidMove(Direction playerDirection, Vector3Int destinationTileCoordinates)
@@ -55,16 +94,6 @@ public class TilemapMovement : MonoBehaviour
         }
         // tile is either a collision or doesn't exist
         return false;
-    }
-
-    private Direction DetermineMoveDirection(Vector2 direction)
-    {
-        Direction moveDirection = Direction.Up;
-        if (direction.x > 0) { moveDirection = Direction.Right; }
-        else if (direction.x < 0) { moveDirection = Direction.Left; }
-        else if (direction.y < 0) { moveDirection = Direction.Down; }
-
-        return moveDirection;
     }
 
     private Vector3 GetVectorDirectionByEnum(Direction directionEnum)
