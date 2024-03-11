@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,8 +9,11 @@ public class Lightning : MonoBehaviour
     [SerializeField] [Range(0.1f, 2f)]
     private float lifetime;
 
+    public static event Action<Vector3> LightningStrikeEvent;
+    
     void Start()
     {
+        LightningStrikeEvent?.Invoke(transform.position);
         StartCoroutine(Expire());
     }
 
@@ -21,9 +25,10 @@ public class Lightning : MonoBehaviour
     
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        Entity entityScript = other.GetComponent<Entity>();
+        if (entityScript != null)
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            entityScript.Die();
         }
     }
 }
