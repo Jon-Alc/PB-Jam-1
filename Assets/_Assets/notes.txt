@@ -18,15 +18,15 @@ O make ledge tiles
   | done for now
 
 O Implement goal behavior
-- Implement lightning behavior
+O Implement lightning behavior
   O Target appears randomly on a walkable or water tile
   O Target appears for 2 seconds, before lightning strikes
-  - Lightning strike
-    + If it's a water tile, BFS through all tiles and make them all dangerous
+  O Lightning strike
+    O If it's a water tile, BFS through all tiles and make them all dangerous
     O If it's not, just hit that tile
-    + If player is on any affected tiles, reset scene
-- Implement AI behavior
-- Implement die and restart
+    O If player is on any affected tiles, reset scene
+O Implement AI behavior
+O Implement die and restart
 O Tile movement transitions, for general movement and for ledges
   | if we take this game further, it may be worth replacing the code with the Unity animator
 
@@ -78,3 +78,5 @@ Lessons learned:
 - The player was moving twice--once for pressing the button, and once for performing the action or something like that
   | I also needed to make a movement cancelled event to reset the input vector
 - The player is also not moving at 0 or 1, but in between. The input is normalized in that if you go diagonal, it's (.71, .71) and not (1, 1)
+- When doing polymorphism, be careful when using the same event functions
+  | Awake() was implemented in Entity and Bear, and Bear's Awake() overwrote Entity's Awake()

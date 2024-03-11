@@ -75,7 +75,7 @@ public class TilemapMovement : MonoBehaviour
 
     }
 
-    private bool ValidMove(Direction playerDirection, Vector3Int destinationTileCoordinates)
+    public bool ValidMove(Direction playerDirection, Vector3Int destinationTileCoordinates)
     {
 
         
