@@ -19,6 +19,12 @@ O make ledge tiles
 
 O Implement goal behavior
 - Implement lightning behavior
+  O Target appears randomly on a walkable or water tile
+  O Target appears for 2 seconds, before lightning strikes
+  - Lightning strike
+    + If it's a water tile, BFS through all tiles and make them all dangerous
+    O If it's not, just hit that tile
+    + If player is on any affected tiles, reset scene
 - Implement AI behavior
 - Implement die and restart
 O Tile movement transitions, for general movement and for ledges

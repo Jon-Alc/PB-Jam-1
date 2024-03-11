@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8687261725430473216}
   - component: {fileID: 6520498684972837315}
   - component: {fileID: 3728932440691170392}
+  - component: {fileID: 6989820516987941273}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -198,3 +199,16 @@ MonoBehaviour:
   collisionTilemap: {fileID: 0}
   tileData: {fileID: 11400000, guid: 2d3cade2a72078d45a3d02ea89950cf0, type: 2}
   tileTravelSpeed: 0
+--- !u!114 &6989820516987941273
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1213956673311411964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04d6d63509355034ba961faa604bc68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  entityTilemap: {fileID: 0}
