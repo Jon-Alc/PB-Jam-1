@@ -6,6 +6,12 @@ public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
     protected Tilemap entityTilemap;
+    [Tooltip("Up = 0, Down = 1, Left = 2, Right = 3")]
+    [SerializeField] protected List<Sprite> directionalSprites;
+
+    public List<Sprite> DirectionalSprites => directionalSprites;
+
+    [SerializeField] protected SpriteRenderer spriteRenderer;
 
     protected Vector3 _tileOffset;
     
@@ -17,8 +23,6 @@ public abstract class Entity : MonoBehaviour
     protected virtual void SetupOnAwake()
     {
         _tileOffset = entityTilemap.tileAnchor;
-        Debug.Log($"{gameObject.name}");
-        Debug.Log(_tileOffset);
     }
     
     void OnEnable()
@@ -33,18 +37,14 @@ public abstract class Entity : MonoBehaviour
     
     void OnLightningHitsWater(List<(int, int)> affectedCoordinates)
     {
-        // Debug.Log("OnLightningHitsWater called");
         Vector2 tileCoordinates = transform.position - _tileOffset;
         (int, int) coordinateTuple = ((int)tileCoordinates.x, (int)tileCoordinates.y);
-        // Debug.Log($"{gameObject.name}, transform: {transform.position}");
-        // Debug.Log($"{gameObject.name}, adjusted: {coordinateTuple}");
         foreach (var tuple in affectedCoordinates)
         {
             Debug.Log(tuple);
         }
         if (affectedCoordinates.Contains(coordinateTuple))
         {
-            Debug.Log("Bear should be dead");
             Die();
         }
     }

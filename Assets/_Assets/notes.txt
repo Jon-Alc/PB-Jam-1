@@ -12,9 +12,9 @@ O figure out how to get tiles to do certain effects
 O make ledge tiles
   | script is already made, just need to drag it on
 
-* Import Jo's art assets
+O Import Jo's art assets
   | done for now
-* Replace all the tiles
+O Replace all the tiles
   | done for now
 
 O Implement goal behavior
@@ -29,7 +29,7 @@ O Implement AI behavior
 O Implement die and restart
 O Tile movement transitions, for general movement and for ledges
   | if we take this game further, it may be worth replacing the code with the Unity animator
-
+- oh forgot to make the bear chase the player only when in range
 
 - keep in mind:
   | one tilemap per layer
@@ -80,3 +80,5 @@ Lessons learned:
 - The player is also not moving at 0 or 1, but in between. The input is normalized in that if you go diagonal, it's (.71, .71) and not (1, 1)
 - When doing polymorphism, be careful when using the same event functions
   | Awake() was implemented in Entity and Bear, and Bear's Awake() overwrote Entity's Awake()
+
+- _All_ of this work was basically done by Jonathan Alcantara and Josephine Sun

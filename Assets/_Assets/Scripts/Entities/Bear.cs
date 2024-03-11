@@ -29,17 +29,16 @@ public class Bear : Entity
 
         if (movesForConsideration.Count == 0)
         {
-            Debug.Log("No moves considered");
             return;
         }
 
         Direction chosenMove = movesForConsideration[Random.Range(0, movesForConsideration.Count)];
+        spriteRenderer.sprite = directionalSprites[(int) chosenMove];
         tilemapMovement.Move(chosenMove);
     }
 
     void ConsiderMoves()
     {
-        Debug.Log("Considering moves");
         movesForConsideration.Clear();
         
         Vector3 playerPosition = PlayerEntity.transform.position;
