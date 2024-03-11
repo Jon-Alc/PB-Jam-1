@@ -16,12 +16,12 @@ public class Goal : MonoBehaviour
 
     void OnEnable()
     {
-        PlayerMovement.PlayerCharacterMove += OnPlayerCharacterMove;
+        Player.PlayerCharacterMove += OnPlayerCharacterMove;
     }
 
     void OnDisable()
     {
-        PlayerMovement.PlayerCharacterMove -= OnPlayerCharacterMove;
+        Player.PlayerCharacterMove -= OnPlayerCharacterMove;
     }
 
     private void OnTriggerEnter2D(Collider2D other)

@@ -4,14 +4,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Tilemaps;
+using UnityEngine.SceneManagement;
 
-public class PlayerMovement : MonoBehaviour
+public class Player : Entity
 {
     [SerializeField] private InputReader input;
     [SerializeField] private TilemapMovement tilemapMovement;
-    [SerializeField] private SpriteRenderer spriteRenderer;
-    [Tooltip("Up = 0, Down = 1, Left = 2, Right = 3")]
-    [SerializeField] private List<Sprite> directionalSprites; 
     
     private Vector2 _moveDirection;
 
@@ -77,5 +75,19 @@ public class PlayerMovement : MonoBehaviour
         else if (direction.y < 0) { moveDirection = Direction.Down; }
 
         return moveDirection;
+    }
+    
+    public override void Die()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        Entity enemyScript = other.GetComponent<Entity>();
+        if (enemyScript != null)
+        {
+            Die();
+        }
     }
 }
